@@ -1,0 +1,8 @@
+How to run this application
+This application is built on pythn 2.7.9 and django 1.5
+1. Run the following command incommand prompt
+python manage.py syncdb
+2. Run the server.By default, the runserver command starts the development server on the internal IP at port 8000.
+python manage.py runserver
+3.Development server url will be shown in command prompt. Copy that url in your browser.
+4.Home page of twitter will open.
