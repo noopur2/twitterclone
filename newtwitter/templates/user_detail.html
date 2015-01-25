@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load comments %}
+{% block content %}
+<h2>{{ object.username }}'s Profile</h2>
+{% if object.userprofile.bio %}
+<div>
+<b>Bio:</b>
+{{ object.userprofile.bio }}
+</div>
+{% endif %}
+
+
+<div>
+<b>Followers:</b>
+{{ object.following.follower }}
+</div>
+
+<div>
+<b>Following:</b>
+{{ object.following.follow }}
+</div>
+
+{% if object.username == user.username %}
+<p><a href='{% url "edit_profile" %}'>Edit my profile</a></p>
+{% endif %}
+
+<ol>
+    {% for tweets in object_list %}
+    <li>
+	   
+	   <b>{{ tweets.submitter }}</b>
+		
+		<a href="{% url 'tweets_detail' pk=tweets.pk %}">
+		<p>{{ tweets.tweet }}</p>
+		<p>{{tweets.submitted_on}}</p> 
+		
+          <p>Retweets : {{tweets.retweets}}
+          
+		<p>{% get_comment_count for tweets as comment_count %}
+        {{ comment_count }} comment{{ comment_count|pluralize }}
+		</p>
+		</a>
+		
+	</li>
+	
+	{% endfor %}
+</ol>
+
+{% endblock %}

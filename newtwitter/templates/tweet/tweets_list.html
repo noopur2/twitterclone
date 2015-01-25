@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load comments %}
+{% block content %}
+<ol>
+{% for tweets in object_list %}
+    <form method="post" action="{% url 'retweet' %}" class="retweet_form">
+    <li>
+	   
+	   <b>{{ tweets.submitter }}</b>
+		</a>
+		<a href="{% url 'tweets_detail' pk=tweets.pk %}">
+		<p>{{ tweets.tweet }}</p>
+		<p>{{tweets.submitted_on}}</p> 
+		
+
+          <p>Retweets : {{tweets.retweets}}
+          {% csrf_token %}
+          <input type="hidden" id="id_tweetId" name="tweetId" class="hidden_id" value="{{ tweets.pk }}" />
+          <input type="hidden" id="id_userId" name="userId" class="hidden_id" value="{{ user.pk }}" />
+          <button>+</button>		</p>
+		<p>{% get_comment_count for tweets as comment_count %}
+        {{ comment_count }} comment{{ comment_count|pluralize }}
+		</p>
+		</a>
+		
+	</li>
+	</form>
+	{% endfor %}
+</ol>
+{% endblock %}

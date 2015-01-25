@@ -1,0 +1,14 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+<ol>
+{% for following in object_list %}
+    <li>
+    
+      <b>{{ following.follower }}</b>
+    
+    </li>
+{% endfor %}
+</ol>
+{% endblock %}
